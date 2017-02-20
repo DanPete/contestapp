@@ -34,7 +34,7 @@ class ShopifyIntegration
 
 
     # Get the first page of orders
-    shopify_orders = ShopifyAPI::Order.find(:all, params: {limit: 50, page: page})
+    shopify_orders = ShopifyAPI::Order.find(:all, params: {limit: 250, page: page})
 
     # Keep going while we have more orders to process
     while shopify_orders.size > 0
@@ -46,11 +46,14 @@ class ShopifyIntegration
 
         unless order.present?
 
-          # If not already imported, create a new order
+          # If not already imported, create a new order # Killed billing_address
           order = Order.new(number: shopify_order.name,
                             email: shopify_order.email,
-                            first_name: shopify_order.billing_address.first_name,
-                            last_name: shopify_order.billing_address.last_name,
+                            first_name: shopify_order.shipping_address.first_name,
+                            last_name: shopify_order.shipping_address.last_name,
+                            #Other option that didn't seemed to work
+                            #first_name: shopify_order.billing_address.first_name,
+                            #last_name: shopify_order.billing_address.last_name,
                             shopify_order_id: shopify_order.id,
                             order_date: shopify_order.created_at,
                             total: shopify_order.total_price,
@@ -80,7 +83,7 @@ class ShopifyIntegration
 
       # Grab the next page of products
       page += 1
-      shopify_orders = ShopifyAPI::Order.find(:all, params: {limit: 50, page: page})
+      shopify_orders = ShopifyAPI::Order.find(:all, params: {limit: 250, page: page})
 
 
     end
@@ -96,7 +99,7 @@ class ShopifyIntegration
     page = 1
 
     # Grab the first page of products
-    shopify_products = ShopifyAPI::Product.find(:all, params: {limit: 100, page: page})
+    shopify_products = ShopifyAPI::Product.find(:all, params: {limit: 250, page: page})
 
     # Keep looping until no more products are returned
     while shopify_products.size > 0
@@ -148,7 +151,7 @@ class ShopifyIntegration
 
       # Grab the next page of products
       page += 1
-      shopify_products = ShopifyAPI::Product.find(:all, params: {limit: 100, page: page})
+      shopify_products = ShopifyAPI::Product.find(:all, params: {limit: 250, page: page})
 
 
     end

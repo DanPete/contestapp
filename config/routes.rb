@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :column_fix4s
+  resources :orders do
+    collection do
+      get 'import'
+    end
+  end
   resources :variants
   resources :products do
     collection do

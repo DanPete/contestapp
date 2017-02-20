@@ -1,0 +1,2 @@
+module ColumnFix4sHelper
+end

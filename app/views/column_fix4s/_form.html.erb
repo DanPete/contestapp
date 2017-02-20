@@ -1,0 +1,17 @@
+<%= form_for(column_fix4) do |f| %>
+  <% if column_fix4.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(column_fix4.errors.count, "error") %> prohibited this column_fix4 from being saved:</h2>
+
+      <ul>
+      <% column_fix4.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170219194515) do
+ActiveRecord::Schema.define(version: 20170220115934) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "shopify_account_url"
@@ -19,6 +19,39 @@ ActiveRecord::Schema.define(version: 20170219194515) do
     t.string   "shopify_shared_secret"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+  end
+
+  create_table "column_fix4s", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer  "order_id"
+    t.bigint   "variant_id"
+    t.bigint   "shopify_product_id"
+    t.bigint   "shopify_variant_id"
+    t.float    "unit_price"
+    t.integer  "quantity"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["shopify_variant_id"], name: "index_order_items_on_shopify_variant_id"
+    t.index ["variant_id"], name: "index_order_items_on_variant_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string   "number"
+    t.string   "email"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.bigint   "shopify_order_id"
+    t.datetime "order_date"
+    t.float    "total"
+    t.integer  "line_item_count"
+    t.string   "financial_status"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "products", force: :cascade do |t|

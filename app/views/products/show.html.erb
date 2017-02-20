@@ -9,7 +9,7 @@
   <dt><strong><%= model_class.human_attribute_name(:shopify_product_id) %>:</strong></dt>
   <dd><%= @product.shopify_product_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:last_shopify_sync) %>:</strong></dt>
-  <dd><%= @product.last_shopify_sync %></dd>
+  <dd><%= @product.last_shopify_sync.strftime("%k:%M on %B %d, %Y") %></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),

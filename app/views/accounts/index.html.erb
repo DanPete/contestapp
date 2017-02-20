@@ -10,7 +10,7 @@
       <th><%= model_class.human_attribute_name(:shopify_api_key) %></th>
       <th><%= model_class.human_attribute_name(:shopify_password) %></th>
       <th><%= model_class.human_attribute_name(:shopify_shared_secret) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name("Created") %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -18,11 +18,11 @@
     <% @accounts.each do |account| %>
       <tr>
         <td><%= link_to account.id, account_path(account) %></td>
-        <td><%= account.shopify_account_url %></td>
-        <td><%= account.shopify_api_key %></td>
-        <td><%= account.shopify_password %></td>
-        <td><%= account.shopify_shared_secret %></td>
-        <td><%=l account.created_at %></td>
+        <td><%= account.shopify_account_url.truncate(25) %></td>
+        <td><%= account.shopify_api_key.truncate(20) %></td>
+        <td><%= account.shopify_password.truncate(20) %></td>
+        <td><%= account.shopify_shared_secret.truncate(25) %></td>
+        <td><%= account.created_at.strftime("%B %d, %Y") %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_account_path(account), :class => 'btn btn-default btn-xs' %>

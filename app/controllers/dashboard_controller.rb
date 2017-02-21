@@ -14,6 +14,7 @@ class DashboardController < ApplicationController
 
   # This method creates a Contest and returns the winner(s) in the
   # notice message
+
   def create_contest
     @contest = Contest.new(contest_params)
 
@@ -43,7 +44,7 @@ class DashboardController < ApplicationController
   private
 
   def contest_params
-    params.require(:contest).permit(:name, :product_id, :start_date, :end_date, :max_results, :order_id, :criteria)
+    params.require(:contest).permit(:name, :product_id, :start_date, :end_date, :max_result, :order_id, :criteria)
   end
 
 

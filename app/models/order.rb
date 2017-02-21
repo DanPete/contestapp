@@ -4,8 +4,8 @@ class Order < ActiveRecord::Base
   # This method constructs the query based on
   # the passed-in parameters
   def self.candidate_list(params={})
-    params[:sort] ||= "order_date asc"
-    orders = order(params[:sort]).includes(:order_items)
+    params[:order] ||= "order_date asc"
+    orders = order(params[:order])
 
     if params[:max_results].present?
       orders = orders.limit(params[:max_results].to_i)

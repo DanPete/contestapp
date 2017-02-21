@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170220115934) do
+ActiveRecord::Schema.define(version: 20170221001305) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "shopify_account_url"
@@ -26,15 +26,28 @@ ActiveRecord::Schema.define(version: 20170220115934) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "contests", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "product_id",   limit: 8
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer  "max_result"
+    t.bigint   "order_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "product_name"
+    t.index ["order_id"], name: "index_contests_on_order_id"
+  end
+
   create_table "order_items", force: :cascade do |t|
-    t.integer  "order_id"
-    t.bigint   "variant_id"
-    t.bigint   "shopify_product_id"
-    t.bigint   "shopify_variant_id"
+    t.bigint   "order_id"
+    t.integer  "variant_id",         limit: 8
+    t.integer  "shopify_product_id", limit: 8
+    t.integer  "shopify_variant_id", limit: 8
     t.float    "unit_price"
     t.integer  "quantity"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.index ["order_id"], name: "index_order_items_on_order_id"
     t.index ["shopify_variant_id"], name: "index_order_items_on_shopify_variant_id"
     t.index ["variant_id"], name: "index_order_items_on_variant_id"

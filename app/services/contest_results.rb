@@ -3,8 +3,7 @@ class ContestResults
     raise ArgumentError.new("array is required") if array.blank?
     @array = array
   end
-
-  #Picks <count> winners
+  # Picks <count> winners
   def results(count=1)
     if count.to_i < 2
       @array.sample

@@ -7,6 +7,5 @@ class CreateProducts < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
-    change_column :bigint
   end
 end

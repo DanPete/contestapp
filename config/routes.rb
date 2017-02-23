@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :dashboard
   get 'dashboard/index'
   post "create_contest" => 'dashboard#create_contest'
+   get "test_connection" => 'dashboard#test_connection'
 
   root 'dashboard#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -41,11 +41,40 @@ class DashboardController < ApplicationController
 
   end
 
+#GET /accounts/1/test_connection
+#GET /accounts/1/test_connection.json
+  def test_connection
+    #Connect to Shopify using our class
+    ShopifyIntegration.new(url: current_account.shopify_account_url,
+                           password: current_account.shopify_password,
+                           account_id: current_account.id).connect()
+    begin
+      # The gem will throw an exception if unable to retrieve Shop information
+      shop = ShopifyAPI::Shop.current
+    rescue => ex
+      @message = ex.message
+    end
+
+    if shop.present?
+      respond_to do |format|
+        #Report the good news
+        format.html { redirect_to dashboard_index_path, notice: "Successfully Connected to #{shop.name}" }
+        format.json { render json: "Successfully Connected to #{shop.name}" }
+      end
+    else
+      respond_to do |format|
+      #Return message from exceptions
+        format.html { redirect_to dashboard_index_path, alert: "Unable to Connect: #{@message}" }
+        format.json { render json: "Unable to Connect: #{@message}", status: unprocessable_entity }
+      end
+    end
+  end
+
+
   private
 
   def contest_params
     params.require(:contest).permit(:name, :product_id, :start_date, :end_date, :max_result, :order_id, :criteria)
   end
-
 
 end

@@ -51,4 +51,8 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  SHOPIFY_API_KEY = "60c2d01ca3f3941c9129c42e08b777bb"
+  SHOPIFY_SHARED_SECRET = "a9396077e04c558033cb6211a3140dab"
+  DOMAIN = "http://localhost:3000"
 end

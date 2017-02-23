@@ -10,15 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170221151834) do
+ActiveRecord::Schema.define(version: 20170223172155) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "shopify_account_url"
-    t.string   "shopify_api_key"
     t.string   "shopify_password"
-    t.string   "shopify_shared_secret"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.bigint   "shopify_shop_id"
+    t.string   "shopify_shop_name"
+    t.string   "shop_owner"
+    t.string   "email"
+    t.index ["email"], name: "index_accounts_on_email"
+    t.index ["shopify_account_url"], name: "index_accounts_on_shopify_account_url"
   end
 
   create_table "column_fix4s", force: :cascade do |t|

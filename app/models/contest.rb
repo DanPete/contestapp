@@ -12,4 +12,5 @@ class Contest < ActiveRecord::Base
     results << "Max #: #{max_result}" if max_result.present?
     return results.join(', ')
   end
+
 end

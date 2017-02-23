@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :contests
+  resources :dashboard
   get 'dashboard/index'
   post "create_contest" => 'dashboard#create_contest'
 
